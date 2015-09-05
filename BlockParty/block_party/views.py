@@ -23,3 +23,6 @@ def create_event(request):
 def profile(request):
 	return HttpResponse("profile")
 
+def authenticate(request):
+	return HttpResponseRedirect(reverse('block_party_app:events'))
+
