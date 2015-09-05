@@ -8,7 +8,7 @@ def index(request):
 	return render(request, 'block_party/index.html', {})
 
 def signup(request):
-	return HttpResponse("signup")
+	return render(request, 'block_party/signup.html')
 
 def events(request):
 	return HttpResponse("events")
