@@ -36,6 +36,7 @@ class AvailabilityInfo(models.Model):
 
 class Event(models.Model):
 	create_date = models.DateTimeField('date published')
+	creator = models.ForeignKey(Profile)
 	event_name = models.CharField(max_length=200, default="event")
 	business_name = models.CharField(max_length=200)
 	street_address = models.CharField(max_length=200)
@@ -57,6 +58,3 @@ class Invite(models.Model):
 	invitee = models.ForeignKey(IndividualProfile)
 	ATTENDANCE_CHOICES = (('Yes', 'Yes'),('No', 'No'),('Waiting', 'Waiting'),)
 	confirmed = models.CharField(choices=ATTENDANCE_CHOICES, max_length=100)
-
-
-
