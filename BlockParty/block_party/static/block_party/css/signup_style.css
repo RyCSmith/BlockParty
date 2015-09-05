@@ -1,3 +1,7 @@
 .centered {
-    margin-left: auto;
+   text-align: center;
+}
+
+html {
+  background-image: url('http://www.inspirationibiza.com/wp-content/uploads/2015/02/pacha1.jpg');
 }
