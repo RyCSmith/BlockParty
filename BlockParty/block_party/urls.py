@@ -19,4 +19,6 @@ urlpatterns = [
     url(r'^events/(?P<event_id>[0-9]+)/$', views.event_details, name='event_details'),
     # ex: /profile
     url(r'^profile/$', views.profile, name='profile'),
+    #authentication
+    url(r'^authenticate/$', views.authenticate, name='authenticate')
 ]
