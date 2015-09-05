@@ -36,7 +36,6 @@ class AvailabilityInfo(models.Model):
 
 class Event(models.Model):
 	create_date = models.DateTimeField('date published')
-	creator = models.ForeignKey(Profile)
 	event_name = models.CharField(max_length=200, default="event")
 	business_name = models.CharField(max_length=200)
 	street_address = models.CharField(max_length=200)
