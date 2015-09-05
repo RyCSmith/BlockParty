@@ -5,7 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 def index(request):
-	return HttpResponse("index")
+	return render(request, 'block_party/index.html', {})
 
 def signup(request):
 	return HttpResponse("signup")
@@ -14,7 +14,8 @@ def events(request):
 	return HttpResponse("events")
 
 def event_details(request, event_id):
-	return HttpResponse("event details: " + str(event_id))
+	new = int(event_id)
+	return render(request, 'block_party/index.html', {'event_id':new})
 
 def create_event(request):
 	return HttpResponse("create_event")
