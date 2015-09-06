@@ -19,6 +19,7 @@
 				<form action="{% url 'block_party_app:logout_command' %}" method="post"> 
 					{% csrf_token %}
 					<button type="submit" class="btn btn-primary pull-right title_bar_button">Log out</button>
+					<button type="button" id="launch_signup_button" class="btn btn-primary pull-right title_bar_button"><a class="nav-link"href="{% url 'block_party_app:profile' %}">My Account</a></button>
 				</form>
 			</div>
 		{% else %}
