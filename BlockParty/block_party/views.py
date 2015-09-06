@@ -35,9 +35,15 @@ def event_details(request, event_id):
 def create_event(request):
 	return render(request, 'block_party/create_event.html', {})
 
+"""Displays a user's profile page where they can update their data."""
 @login_required(redirect_field_name='redirect_path')
 def profile(request):
-	return HttpResponse("profile")
+	user = User.objects.get(username=request.user)
+	user_type = ""
+	if len(user.individualprofile_set.all()) > 0:
+		user_type = "IndividualProfile"
+	context = {'user':user, "user_type":user_type}
+	return render(request, 'block_party/profile.html', context)
 
 """Uses POST form data to attempt to authenticate the user. If authentication succeeds, checks if user
 was rerouted from page requiring authentication and redirects there. If not redirects to events page. If
@@ -49,7 +55,7 @@ def authentication(request):
 	redirect_path = request.POST.get('redirect_path', False)
 	if user is not None:
 		login(request, user)
-		if redirect_path != 'False':
+		if redirect_path != False:
 			full_path = 'block_party_app:' + redirect_path
 			full_path = full_path.replace("/", "")
 			return HttpResponseRedirect(reverse(full_path))
