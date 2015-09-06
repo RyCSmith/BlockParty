@@ -1,16 +1,14 @@
 {% load staticfiles %}
 <html>
 <head>
-	<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">-->
-	<link rel="stylesheet" type="text/css" href="{% static 'block_party/css/bootstrap.min.css' %}">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'block_party/css/index_style.css' %}" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="{% static 'block_party/js/bootstrap.min.js' %}"></script>
-	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
-	<link href='https://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<title>Block Party Homepage</title>
 </head>
 <body>
+<<<<<<< HEAD
 <!--Title Bar-->
 	<div id="title_bar">
 		<img src="{% static 'block_party/images/logo2.png' %}" id="logo_image2"/>
@@ -19,8 +17,15 @@
 		<button type="button" id="launch_signin_button" class="btn btn-primary pull-right title_bar_button" data-toggle="modal" data-target="#signInModal" >Sign in</button>
 		{% endif %}
 	</div>
+=======
+
+<div id="title_bar">
+					<button type="button" id="launch_signup_button" class="btn btn-primary pull-right title_bar_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Sign up</a></button>
+					<button type="button" id="launch_signin_button" class="btn btn-primary pull-right title_bar_button" data-toggle="modal" data-target="#signInModal" >Sign in</button>
+				</div>
+>>>>>>> b55dc1a1e093aad39e55d8111d00a2e3441da71d
 <!-- Image Slider -->
-	<div style="position: relative; left: 0; top: 0;">
+<div style="position: relative; left: 0; top: 0;">
       	<div class="slider-container content" id="slider-container">
 			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 			  <!-- Indicators -->
@@ -52,6 +57,7 @@
 		</div>
 		<img src="{% static 'block_party/images/logo.png' %}" id="logo_image"/>
 	</div>
+<<<<<<< HEAD
 	<div id="box1">
 		<div class="container">
 			<div class="row">
@@ -95,6 +101,19 @@
 					<div class="contact_info text-right">101 Secret Address</div>
 					<div class="contact_info text-right">Philadelphia, PA 19104</div>
 				</div>
+=======
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" id="fixed_column">
+				
+				<img idsrc="{% static 'block_party/images/main_image.jpg' %}" alt="main pic">
+				{% if event_id > 10 %}
+				<div class="text-center">Bigger. Event ID: {{event_id}}</div>
+				{% else %}
+				<div>Smaller. Event ID: {{event_id}}</div>
+				{% endif %}
+>>>>>>> b55dc1a1e093aad39e55d8111d00a2e3441da71d
 			</div>
 		</div>
 	</div>
