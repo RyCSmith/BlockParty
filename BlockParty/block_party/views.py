@@ -1,12 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext, loader
 from django.http import HttpResponse, HttpResponseRedirect
+#from django.utils import simplejson
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Event, Invite, IndividualProfile, CorporateProfile
 import methods
+import json
 
 def index(request):
 	if request.user.is_authenticated():
@@ -33,7 +35,26 @@ def event_details(request, event_id):
 
 @login_required(redirect_field_name='redirect_path')
 def create_event(request):
-	return render(request, 'block_party/create_event.html', {})
+	if request.method == "GET":
+		print "hello"
+		if request.GET.has_key(u'query'):
+			print "hello"
+			value = request.GET[u'query']
+			model_results = IndividualProfile.objects.filter(first_name__contains=value)
+			results = [ {x.id :x.first_name,} for x in model_results ]
+			json = json.dumps(results)
+			return HttpResponse(json, mimetype='application/json')
+		else:
+			return render(request, 'block_party/create_event.html', {})
+
+	else:
+		event = request.POST.get('event_name', False)
+		#search = request.POST.get('search_name', False)
+		#if search is not False:
+			#return render(request, 'block_party/create_event.html', {'first_result':IndividualProfile.objects.filter(first_name__contains=search)[0].first_name})
+		#if event is not False:
+			#return render(request, 'block_party/index.html')
+		return render(request, 'block_party/create_event.html', {})
 
 """Displays a user's profile page where they can update their data."""
 @login_required(redirect_field_name='redirect_path')
