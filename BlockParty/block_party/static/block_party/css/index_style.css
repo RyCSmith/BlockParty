@@ -30,7 +30,9 @@ body {
 	display:inline-block;
 	font-family: 'Dosis', sans-serif;
 }
-
+#logout_button_box {
+	display:inline-block;
+}
 #fixed_column {
 	position: fixed;
 }

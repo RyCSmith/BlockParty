@@ -1,0 +1,37 @@
+{% load staticfiles %}
+<html>
+<head>
+	<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">-->
+	<link rel="stylesheet" type="text/css" href="{% static 'block_party/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'block_party/css/login_style.css' %}" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'block_party/js/bootstrap.min.js' %}"></script>
+	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
+	<link href='https://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>	
+	<title>Please Log In</title>
+</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 id="login_text" class="text-center">You have to log in to see that!</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<form action="{% url 'block_party_app:authentication' %}" method="post"> 
+						{% csrf_token %}
+						<label for="user_email" class="control-label">Email</label>
+					    <input type="text" class="form-control" name="user_email" id="user_email">
+					    <label for="user_password" class="control-label">Password</label>
+					    <input type="text" class="form-control" name="user_password" id="user_password">
+					    <input type="text" class="form-control" name="redirect_path" value="{{redirect_path}}" style="display:none">
+						<input type="submit" class="btn btn-default" value="Log In" /> 
+					</form>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+		</div>
+	</body>
+</head>
