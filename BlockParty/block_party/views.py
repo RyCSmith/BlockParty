@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext, loader
 from django.http import HttpResponse, HttpResponseRedirect
-#from .models import 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from .models import Event, Invite
+import methods
 
 def index(request):
 	if request.user.is_authenticated():
@@ -17,14 +18,18 @@ def signup(request):
 	return render(request, 'block_party/signup.html')
 
 def events(request):
-	return HttpResponse("events")
+	return render(request, 'block_party/events.html', {})
 
 def event_details(request, event_id):
-	new = int(event_id)
-	return render(request, 'block_party/index.html', {'event_id':new})
+	context = {}
+	context['event'] = methods.get_event(event_id)
+	context['confirmed_count'] = methods.get_confirmed_count(event_id)
+	context['invite_count'] = methods.get_invited_count(event_id)
+	context['confirmed_perc'] = (methods.get_confirmed_count(event_id) / methods.get_invited_count(event_id)) * 100
+	return render(request, 'block_party/event_details.html', context)
 
 def create_event(request):
-	return HttpResponse("create_event")
+	return render(request, 'block_party/create_event.html', {})
 
 def profile(request):
 	return HttpResponse("profile")
