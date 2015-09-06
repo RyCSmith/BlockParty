@@ -5,38 +5,96 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'block_party/css/create_event_style.css' %}" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'block_party/js/bootstrap.min.js' %}"></script>
-	<title>Event Detail</title>
+	<title>Create Event Page</title>
 </head>
 
 <body>
-  <div class="col-xs-12" style="height:50px;"></div>
-
   <div class="container">
+
+<script type="text/javascript">
+    var typeahead_data = [];
+        function get_client_names() {
+            $.ajax({
+                url: "{% static 'block_party_app:create_event' %}",
+                success: function (data) {
+                    $.each(data, function (key, value) {
+                        typeahead_data.push(value.toString());
+                    });
+                    // assign the array to my typeahead tag
+                    $('.typeahead').typeahead({
+                        source: typeahead_data,
+                    });
+                }
+            });
+        }
+    $(function () {
+        get_client_names();
+    });
+</script>
+
+    <input id="book_lookup" class="search-query typeahead" data-items="4" type="text"
+                        placeholder="Select here....">
+
+    {% if first_result %}
+    {{first_result}}
+    
+    <script type="text/javascript">
+    $(window).load(function(){
+        $('#myModal').modal('show');
+    });
+    </script>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body"> 
+                    
+                    
+                        {%for i in rangeLength%}
+                            <form action="{% url 'block_party_app:create_event' %}" method="post">
+                                <label for="invitee{{i}}d" class="control-label"></label>
+                                <input type="text" class="form-control" name="search_name">
+                                <input type="submit" class="btn btn-default" value="Search" />
+                            <div class="user_pod" >
+                        {{c.i.0.from_user}}
+                    </div>
+                        {% endfor %}}
+                        
+                    </form>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
 
     <div class="row">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form role="form">
-                <div class = "centered">
-                    <h2>Create Event Page <small></h2>
-                <hr class="colorgraph">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <input type="text" name="event_name" id="event_name" class="form-control input-lg" placeholder="Event Name" tabindex="1">
-                        </div>
-                    </div>
-                </div>
                 
+                <form action="{% url 'block_party_app:create_event' %}" method="post">
+                    {% csrf_token %}
+                    <label for="event_name" class="control-label">Event Name</label>
+                    <input type="text" class="form-control" name="event_name">
 
-                <hr class="colorgraph">
-                <div class="row">
-                    <div class = "centered">
-                        <div class="col-xs-12 col-md-6">
-                            <input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="10">
-                        </div>
-                    </div>
-                </div>
-            </form>
+                    <form action="{% url 'block_party_app:create_event' %}" method="post">
+                        <label for="search_name" class="control-label">Search existing users...</label>
+                        <input type="text" class="form-control" name="search_name">
+                        <input type="submit" class="btn btn-default" value="Search" />
+                    </form>
+
+
+                    <input type="submit" class="btn btn-default" value="Submit" /> 
+                </form>
+
         </div>
     </div>
   </div>
