@@ -1,0 +1,17 @@
+To launch the server:
+1. Run "vagrant up" from the directory with the Vagrantfile
+2. "vagrant ssh" into the virtual machine
+3. cd into the /vagrant/BlockParty directory
+4. Run the server with the command "python manage.py runserver 0.0.0.0:8000" (or one of the other ports)
+5. Open a browser on your local machine and navigate to "http://localhost:8000/"
+
+To access the database through the MySQL command line client:
+1. Check that you have mysql installed: run "mysql --version"
+2. Run "mysql -h east-mysql-instance1.czscqrbdzjc7.us-east-1.rds.amazonaws.com -P 3306 -u blockparty –p" (this will then ask for the password, which is the name of the event that we did, all one word, all lowercase)
+3. Run "show tables;" "show columns in auth_user;" etc.
+
+What Andy was working on: submitting the user's availability along with their bio info
+1. Store this info in an invisible input element. This currently kind of works, where clicking two specific squares will add to the value of that invisible "availability" element. Make it so that clicking for a second time will remove that value from the "availability" value.
+2. The "availablity" key will be sent along in the QueryDict that lives in the HttpResponse. In views.py, we will need to create the user and then parse the "availability" info to create rows in the "availability"
+
+Looking for all of the past SQL insert statements??? Well, you won't find them in the Database Inserts folder (some of them were overwritten in a gitastrophe). Look in the commit history for one of Andy's "Added all test data" commit
