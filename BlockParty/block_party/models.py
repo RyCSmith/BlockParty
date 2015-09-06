@@ -57,3 +57,11 @@ class Invite(models.Model):
 	invitee = models.ForeignKey(IndividualProfile)
 	ATTENDANCE_CHOICES = (('Yes', 'Yes'),('No', 'No'),('Waiting', 'Waiting'),)
 	confirmed = models.CharField(choices=ATTENDANCE_CHOICES, max_length=100)
+
+class EventCreationIndividual(models.Model):
+	creator = models.ForeignKey(IndividualProfile)
+	event = models.ForeignKey(Event)
+
+class EventCreationCorporate(models.Model):
+	creator = models.ForeignKey(CorporateProfile)
+	event = models.ForeignKey(Event)
