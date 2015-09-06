@@ -13,7 +13,7 @@
 <body>
 <!--Title Bar-->
 	<div id="title_bar">
-		<img src="{% static 'block_party/images/logo2.png' %}" id="logo_image2"/>
+		<a class="nav-link"href="{% url 'block_party_app:index' %}"><img src="{% static 'block_party/images/logo2.png' %}" id="logo_image2"/></a>
 		{% if loggedin %}
 			<div id="logout_button_box" class="pull-right">
 				<form action="{% url 'block_party_app:logout_command' %}" method="post"> 
@@ -68,10 +68,10 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6 text-center">
-				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Start a new event.</a></button>
+				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:create_event' %}">Start a new event.</a></button>
 			</div>
 			<div class="col-md-6 text-center">
-				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Find events near you.</a></button>
+				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:events' %}">Find events near you.</a></button>
 			</div>
 				</div>
 			</div>

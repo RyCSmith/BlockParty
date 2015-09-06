@@ -14,23 +14,36 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 id="login_text" class="text-center">You have to log in to see that!</h1>
+					{% if redirect_path == False %}
+						<h1 id="login_text" class="text-center">Welcome to Block Party!</h1>
+					{% else %}
+						<h1 id="login_text" class="text-center">You have to log in to see that!</h1>
+					{% endif %}
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-8">
-					<form action="{% url 'block_party_app:authentication' %}" method="post"> 
-						{% csrf_token %}
-						<label for="user_email" class="control-label">Email</label>
-					    <input type="text" class="form-control" name="user_email" id="user_email">
-					    <label for="user_password" class="control-label">Password</label>
-					    <input type="text" class="form-control" name="user_password" id="user_password">
-					    <input type="text" class="form-control" name="redirect_path" value="{{redirect_path}}" style="display:none">
-						<input type="submit" class="btn btn-default" value="Log In" /> 
-					</form>
+				<div class="col-md-3"></div>
+				<div class="col-md-6">
+					<div id="form_box">
+						<form action="{% url 'block_party_app:authentication' %}" method="post"> 
+							{% csrf_token %}
+							<label for="user_email" class="control-label">Email</label>
+						    <input type="text" class="form-control" name="user_email" id="user_email">
+						    <label for="user_password" class="control-label">Password</label>
+						    <input type="text" class="form-control" name="user_password" id="user_password">
+						    <input type="text" class="form-control" name="redirect_path" value="{{redirect_path}}" style="display:none">
+							<input type="submit" class="btn btn-default" value="Log In" /> 
+						</form>
+					</div>
 				</div>
-				<div class="col-md-2"></div>
+				<div class="col-md-3"></div>
+			</div>
+			<div class="col-md-12">
+				<h1 id="login_text" class="text-center">Don't have an account?</h1>
+				<h1 id="login_text" class="text-center"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Sign up</a></h1>
+			</div>
+			<div class="col-md-12">
+				<img src="{% static 'block_party/images/platypus.png' %}" alt="...">
 			</div>
 		</div>
 	</body>
