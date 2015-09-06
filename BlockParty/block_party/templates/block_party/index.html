@@ -1,23 +1,20 @@
 {% load staticfiles %}
 <html>
 <head>
-	<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">-->
-	<link rel="stylesheet" type="text/css" href="{% static 'block_party/css/bootstrap.min.css' %}">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'block_party/css/index_style.css' %}" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script type="text/javascript" src="{% static 'block_party/js/bootstrap.min.js' %}"></script>
-	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
-	<link href='https://fonts.googleapis.com/css?family=Dosis:400,700' rel='stylesheet' type='text/css'>	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<title>Block Party Homepage</title>
 </head>
 <body>
-<!--Title Bar-->
-	<div id="title_bar">
-		<button type="button" id="launch_signup_button" class="btn btn-primary pull-right title_bar_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Sign up</a></button>
-		<button type="button" id="launch_signin_button" class="btn btn-primary pull-right title_bar_button" data-toggle="modal" data-target="#signInModal" >Sign in</button>
-	</div>
+
+<div id="title_bar">
+					<button type="button" id="launch_signup_button" class="btn btn-primary pull-right title_bar_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Sign up</a></button>
+					<button type="button" id="launch_signin_button" class="btn btn-primary pull-right title_bar_button" data-toggle="modal" data-target="#signInModal" >Sign in</button>
+				</div>
 <!-- Image Slider -->
-	<div style="position: relative; left: 0; top: 0;">
+<div style="position: relative; left: 0; top: 0;">
       	<div class="slider-container content" id="slider-container">
 			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 			  <!-- Indicators -->
@@ -49,51 +46,17 @@
 		</div>
 		<img src="{% static 'block_party/images/logo.png' %}" id="logo_image"/>
 	</div>
-	<div id="box1">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1 class="text-center" id="block_party_header">Get together with those you know and those you're yet to meet.</h1>	
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 text-center">
-				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Start a new event.</a></button>
-			</div>
-			<div class="col-md-6 text-center">
-				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Find events near you.</a></button>
-			</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="box2">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1 class="text-center" id="block_party_header">What can we do for you?</h1>
-					<p class="info_box">Block Party is the app that's got your back to help you meet your new neighbors when you move, find some new friends to party with when you're away and schedule some quality face time that works for you and all your closest vip bffs. </p>
-					<p class="info_box">Info...</p>
-					<p class="info_box">Info...</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="box3">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<h1 class="text-center" id="block_party_header">Get together with those you know and those you're yet to meet.</h1>	
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 text-center">
-				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Start a new event.</a></button>
-			</div>
-			<div class="col-md-6 text-center">
-				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Find events near you.</a></button>
-			</div>
-				</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" id="fixed_column">
+				
+				<img idsrc="{% static 'block_party/images/main_image.jpg' %}" alt="main pic">
+				{% if event_id > 10 %}
+				<div class="text-center">Bigger. Event ID: {{event_id}}</div>
+				{% else %}
+				<div>Smaller. Event ID: {{event_id}}</div>
+				{% endif %}
 			</div>
 		</div>
 	</div>
