@@ -3,9 +3,15 @@ from django.template import RequestContext, loader
 from django.http import HttpResponse, HttpResponseRedirect
 #from .models import 
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 def index(request):
-	return render(request, 'block_party/index.html', {})
+	if request.user.is_authenticated():
+		context = {'loggedin':True,'first_name':request.user.first_name}
+	else:
+		context = {'loggedin':False}
+	return render(request, 'block_party/index.html', context)
 
 def signup(request):
 	return render(request, 'block_party/signup.html')
@@ -23,6 +29,13 @@ def create_event(request):
 def profile(request):
 	return HttpResponse("profile")
 
-def authenticate(request):
-	return HttpResponseRedirect(reverse('block_party_app:events'))
+def authentication(request):
+	email = request.POST.get('user_email', False)
+	password = request.POST.get('user_password', False)
+	user = authenticate(username=email, password=password) 
+	if user is not None:
+		login(request, user)
+		return HttpResponseRedirect(reverse('block_party_app:events'))
+	else:
+		return HttpResponseRedirect(reverse('block_party_app:index'))
 

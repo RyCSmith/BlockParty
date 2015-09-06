@@ -20,5 +20,5 @@ urlpatterns = [
     # ex: /profile
     url(r'^profile/$', views.profile, name='profile'),
     #authentication
-    url(r'^authenticate/$', views.authenticate, name='authenticate')
+    url(r'^authenticate/$', views.authentication, name='authentication')
 ]

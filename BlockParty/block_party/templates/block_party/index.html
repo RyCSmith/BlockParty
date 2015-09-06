@@ -13,8 +13,11 @@
 <body>
 <!--Title Bar-->
 	<div id="title_bar">
+		<img src="{% static 'block_party/images/logo2.png' %}" id="logo_image2"/>
+		{% if not loggedin %}
 		<button type="button" id="launch_signup_button" class="btn btn-primary pull-right title_bar_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Sign up</a></button>
 		<button type="button" id="launch_signin_button" class="btn btn-primary pull-right title_bar_button" data-toggle="modal" data-target="#signInModal" >Sign in</button>
+		{% endif %}
 	</div>
 <!-- Image Slider -->
 	<div style="position: relative; left: 0; top: 0;">
@@ -53,7 +56,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="text-center" id="block_party_header">Get together with those you know and those you're yet to meet.</h1>	
+					<h1 class="text-center block_party_header">Get together with those you know and those you're yet to meet.</h1>	
 				</div>
 			</div>
 			<div class="row">
@@ -71,7 +74,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="text-center" id="block_party_header">What can we do for you?</h1>
+					<h1 class="text-center block_party_header">What can we do for you?</h1>
 					<p class="info_box">Block Party is the app that's got your back to help you meet your new neighbors when you move, find some new friends to party with when you're away and schedule some quality face time that works for you and all your closest vip bffs. </p>
 					<p class="info_box">Info...</p>
 					<p class="info_box">Info...</p>
@@ -82,17 +85,15 @@
 	<div id="box3">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-12">
-					<h1 class="text-center" id="block_party_header">Get together with those you know and those you're yet to meet.</h1>	
+				<div class="col-md-4">
+					<h1 class="text-center block_party_header" style="font-size: 90px">We're all over the place.</h1>	
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6 text-center">
-				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Start a new event.</a></button>
-			</div>
-			<div class="col-md-6 text-center">
-				<button type="button" class="btn btn-primary center_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Find events near you.</a></button>
-			</div>
+				<div class="col-md-8">
+					<h1 class="block_party_header text-right">Get in touch!</h1>	
+					<div class="contact_info text-right">our_email@blockparty.com</div>
+					<div class="contact_info text-right">1-800-PARTY-HARD</div>
+					<div class="contact_info text-right">101 Secret Address</div>
+					<div class="contact_info text-right">Philadelphia, PA 19104</div>
 				</div>
 			</div>
 		</div>
@@ -107,7 +108,7 @@
 		        <h4 class="modal-title" id="signInModalLabel">Sign In</h4>
 		      </div>
 		      <div class="modal-body">
-		        <form action="{% url 'block_party_app:authenticate' %}" method="post"> 
+		        <form action="{% url 'block_party_app:authentication' %}" method="post"> 
 		        	{% csrf_token %}
 		        	<label for="user_email" class="control-label">Email</label>
 		            <input type="text" class="form-control" id="user_email">
