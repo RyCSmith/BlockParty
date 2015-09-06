@@ -85,7 +85,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
-
+LOGIN_URL = "block_party_app:login_page"
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

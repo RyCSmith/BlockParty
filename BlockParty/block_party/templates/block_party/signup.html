@@ -14,53 +14,49 @@
     <div class = "row">
         <div class = "col-md-12">
             <div class = "centered">
-                <button type="button" id="individual_button" class="btn btn-primary btn-lg">Individual</button>
-                <button type="button" id="business_button" class="btn btn-primary btn-lg">Business</button>
+                <button type="button" id="individual_button" class="btn btn-primary btn-lg">Individual </button>
+                <button type="button" id="business_button" class="btn btn-primary btn-lg">Business </button>
             </div>
         </div>
     </div>
   </div>
 
-
-
   <div class="container">
     <div class="row" id="individual_form">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form role="form">
-                <div class = "centered">
-                    <h2>Block Party Individual Signup <small></h2>
+            <form role="form" action="{% url 'block_party_app:add_individual' %}" method="post">
+                {% csrf_token %}
+                <div class="centered">
+                    <h2>Block Party Individual Signup</h2>
                 <hr class="colorgraph">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
+                            <input type="text" name="first_name" required id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+                            <input type="text" name="last_name" required id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email" tabindex="3">
+                    <input type="email" name="email" required id="email" class="form-control input-lg" placeholder="Email" tabindex="3">
                 </div>
                 <div class="form-group">
-                    <input type="text" name="address" id="address" class="form-control input-lg" placeholder="Address" tabindex="4">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="address2" id="address2" class="form-control input-lg" placeholder="Address (Continued)" tabindex="5">
+                    <input type="text" name="street_address" required id="street_address" class="form-control input-lg" placeholder="Address (Street, Apt)" tabindex="4">
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="city" id="city" class="form-control input-lg" placeholder="City" tabindex="6">
+                            <input type="text" name="city_name" required id="city_name" class="form-control input-lg" placeholder="City" tabindex="5">
                         </div>
                     </div>
 
                     <div class="col-lg-6 col-sm-6 col-xs-12">
                         <div class="form-group">
-                            <select name="state" id="city" class="form-control" tabindex="7">
+                            <select name="state_name" id="state_name" class="form-control" tabindex="6">
                                 <option value="AL">AL</option>
                                 <option value="AK">AK</option>
                                 <option value="AZ">AZ</option>
@@ -117,28 +113,87 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <input type="int" name="zipcode" id="zipcode" class="form-control input-lg" placeholder="Zip Code" tabindex="8">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="zip_code" required id="zip_code" class="form-control input-lg" placeholder="Zipcode" tabindex="7">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="phone_num" required id="phone_num" class="form-control input-lg" placeholder="Phone Number" tabindex="8">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="9">
+                            <input type="password" name="password" required id="password" class="form-control input-lg" placeholder="Password" tabindex="9">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="9">
+                            <input type="password" name="password_confirmation" required id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="9">
                         </div>
                     </div>
                 </div>
-
 
                 <hr class="colorgraph">
+
+                <div class="row">
+                  <div class="centered" style="width:100%">
+                    <h2>Availability</h2>
+                  </div>
+                  <table style="width:100%">
+                    <tr>
+                      <th style="font-size:110%">Sun (9/6)</th>
+                      <th style="font-size:110%">Mon (9/7)</th>   
+                      <th style="font-size:110%">Tues (9/8)</th>
+                      <th style="font-size:110%">Wed (9/9)</th>
+                      <th style="font-size:110%">Thurs (9/10)</th>
+                      <th style="font-size:110%">Fri (9/11)</th>
+                      <th style="font-size:110%">Sat (9/12)</th>
+                    </tr>
+                    <tr>
+                      <td style="cursor: pointer;" onclick="adjustAvailability(this)" id="1M">Morning</td>
+                      <td style="cursor: pointer;" onclick="adjustAvailability(this)" id="2M">Morning</td>    
+                      <td style="cursor: pointer;">Morning</td>    
+                      <td style="cursor: pointer;">Morning</td>    
+                      <td style="cursor: pointer;">Morning</td>    
+                      <td style="cursor: pointer;">Morning</td>    
+                      <td style="cursor: pointer;">Morning</td>
+                    </tr>
+                    <tr>
+                      <td style="cursor: pointer;">Afternoon</td>
+                      <td style="cursor: pointer;">Afternoon</td>
+                      <td style="cursor: pointer;">Afternoon</td>
+                      <td style="cursor: pointer;">Afternoon</td>
+                      <td style="cursor: pointer;">Afternoon</td>
+                      <td style="cursor: pointer;">Afternoon</td>
+                      <td style="cursor: pointer;">Afternoon</td>
+                    </tr>
+                    <tr>
+                      <td style="cursor: pointer;">Evening</td>
+                      <td style="cursor: pointer;">Evening</td>
+                      <td style="cursor: pointer;">Evening</td>
+                      <td style="cursor: pointer;">Evening</td>
+                      <td style="cursor: pointer;">Evening</td>
+                      <td style="cursor: pointer;">Evening</td>
+                      <td style="cursor: pointer;">Evening</td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="form-group">
+                    <input type="availability" name="availability" required id="availability" class="form-control input-lg" placeholder="Availability" tabindex="3" value="0" style="display: none">
+                </div>
+
+                <hr class="colorgraph">
+                
                 <div class="row">
                     <div class = "centered">
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-md-12">
                             <input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="10">
                         </div>
                     </div>
@@ -149,43 +204,60 @@
   </div>
 
   <div class="container">
-    <div class="row" id="business_form">
+    <div class="row" id="business_form" style="display: none">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form role="form">
+            <form role="form" action="{% url 'block_party_app:add_corporate' %}" method="post">
+                {% csrf_token %}
                 <div class = "centered">
-                    <h2>Block Party Business Signup <small></h2>
+                    <h2>Block Party Business Signup</h2>
                 <hr class="colorgraph">
                 <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <input type="text" name="business_name" required id="business_name" class="form-control input-lg" placeholder="Company Name" tabindex="11">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="first_name" id="first_name" class="form-control input-lg" placeholder="First Name" tabindex="1">
+                            <input type="text" name="email" required id="email" class="form-control input-lg" placeholder="Email" tabindex="12">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="last_name" id="last_name" class="form-control input-lg" placeholder="Last Name" tabindex="2">
+                            <input type="text" name="phone_num" required id="phone_num" class="form-control input-lg" placeholder="Phone Number" tabindex="13">
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email" tabindex="3">
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="contact_first" required id="contact_first" class="form-control input-lg" placeholder="Contact Person: First Name" tabindex="14">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="contact_last_name" required id="contact_last_name" class="form-control input-lg" placeholder="Last Name" tabindex="15">
+                        </div>
+                    </div>
                 </div>
+
                 <div class="form-group">
-                    <input type="text" name="address" id="address" class="form-control input-lg" placeholder="Address" tabindex="4">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="address2" id="address2" class="form-control input-lg" placeholder="Address (Continued)" tabindex="5">
+                    <input type="text" name="street_address" required id="street_address" class="form-control input-lg" placeholder="Address (Street, Apt)" tabindex="16">
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="city" id="city" class="form-control input-lg" placeholder="City" tabindex="6">
+                            <input type="text" name="city_name" required id="city_name" class="form-control input-lg" placeholder="City" tabindex="17">
                         </div>
                     </div>
 
                     <div class="col-lg-6 col-sm-6 col-xs-12">
                         <div class="form-group">
-                            <select name="state" id="city" class="form-control" tabindex="7">
+                            <select name="state_name" id="state_name" class="form-control" tabindex="18">
                                 <option value="AL">AL</option>
                                 <option value="AK">AK</option>
                                 <option value="AZ">AZ</option>
@@ -243,18 +315,18 @@
                 </div>
 
                 <div class="form-group">
-                    <input type="int" name="zipcode" id="zipcode" class="form-control input-lg" placeholder="Zip Code" tabindex="8">
+                    <input type="text" name="zip_code" required id="zip_code" class="form-control input-lg" placeholder="Zip Code" tabindex="19">
                 </div>
 
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="9">
+                            <input type="password" name="password" required id="password" class="form-control input-lg" placeholder="Password" tabindex="20">
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="9">
+                            <input type="password" name="password_confirmation" required id="password_confirmation" class="form-control input-lg" placeholder="Confirm Password" tabindex="20">
                         </div>
                     </div>
                 </div>
@@ -262,9 +334,9 @@
 
                 <hr class="colorgraph">
                 <div class="row">
-                    <div class = "centered">
-                        <div class="col-xs-12 col-md-6">
-                            <input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="10">
+                    <div class="col-xs-12 col-md-12 text-center">
+                        <div class = "centered">
+                            <input type="submit" value="Register" class="btn btn-primary btn-block btn-lg" tabindex="21">
                         </div>
                     </div>
                 </div>
@@ -274,26 +346,60 @@
   </div>
 
   <script type="text/javascript">
-   function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
+
+   function switch_to_business() {
+       var e = document.getElementById("business_form");
+       var g = document.getElementById("individual_form");
+       if(e.style.display == 'none')
           e.style.display = 'block';
+          g.style.display = 'none';
    }
+
+   function switch_to_individual() {
+       var e = document.getElementById("business_form");
+       var g = document.getElementById("individual_form");
+       if(g.style.display == 'none')
+          g.style.display = 'block';
+          e.style.display = 'none';
+   }
+
   </script>
+
   <script type="text/javascript">
-    toggle_visibility('business_form');
 
+    $('td').click(function() {
+       $(this).css('backgroundColor', '#0FF');
+    });
+
+  </script>
+
+  <script type="text/javascript">
     $('#business_button').click(function() {
-        toggle_visibility('individual_form');
-        toggle_visibility('business_form');
+        switch_to_business();
+    });
 
-    });
     $('#individual_button').click(function() {
-        toggle_visibility('business_form');
-        toggle_visibility('individual_form');
+        switch_to_individual();
     });
+
+
+    $('form').on('submit',function(){
+        if($('#password').val()!=$('#password_confirmation').val()){
+            alert('Password not matches');
+            return false;
+    }
+        return true;
+    });
+
+  </script>
+
+  <script type="text/javascript">
+
+    function adjustAvailability(f) {
+      var e = document.getElementById("availability");
+      e.value = e.value + f.id;
+    }
+
   </script>
 
 </body>

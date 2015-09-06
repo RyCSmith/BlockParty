@@ -14,9 +14,16 @@
 <!--Title Bar-->
 	<div id="title_bar">
 		<img src="{% static 'block_party/images/logo2.png' %}" id="logo_image2"/>
-		{% if not loggedin %}
-		<button type="button" id="launch_signup_button" class="btn btn-primary pull-right title_bar_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Sign up</a></button>
-		<button type="button" id="launch_signin_button" class="btn btn-primary pull-right title_bar_button" data-toggle="modal" data-target="#signInModal" >Sign in</button>
+		{% if loggedin %}
+			<div id="logout_button_box" class="pull-right">
+				<form action="{% url 'block_party_app:logout_command' %}" method="post"> 
+					{% csrf_token %}
+					<button type="submit" class="btn btn-primary pull-right title_bar_button">Log out</button>
+				</form>
+			</div>
+		{% else %}
+			<button type="button" id="launch_signup_button" class="btn btn-primary pull-right title_bar_button"><a class="nav-link"href="{% url 'block_party_app:signup' %}">Sign up</a></button>
+			<button type="button" id="launch_signin_button" class="btn btn-primary pull-right title_bar_button" data-toggle="modal" data-target="#signInModal" >Sign in</button>
 		{% endif %}
 	</div>
 <!-- Image Slider -->
@@ -50,13 +57,13 @@
 			  </a>
 			</div> <!-- Carousel -->
 		</div>
-		<img src="{% static 'block_party/images/logo.png' %}" id="logo_image"/>
+		<img src="{% static 'block_party/images/logo3.png' %}" id="logo_image"/>
 	</div>
 	<div id="box1">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1 class="text-center block_party_header">Get together with those you know and those you're yet to meet.</h1>	
+					<h1 class="text-center block_party_header">Get together with those you know and those you've yet to meet.</h1>	
 				</div>
 			</div>
 			<div class="row">
@@ -111,9 +118,9 @@
 		        <form action="{% url 'block_party_app:authentication' %}" method="post"> 
 		        	{% csrf_token %}
 		        	<label for="user_email" class="control-label">Email</label>
-		            <input type="text" class="form-control" id="user_email">
+		            <input type="text" class="form-control" name="user_email" id="user_email">
 		            <label for="user_password" class="control-label">Password</label>
-		            <input type="text" class="form-control" id="user_password">
+		            <input type="text" class="form-control" name="user_password" id="user_password">
 		        	<input type="submit" class="btn btn-default" value="Log In" /> 
 		    	</form>
 		      </div>
