@@ -1,11 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext, loader
 from django.http import HttpResponse, HttpResponseRedirect
-#from .models import 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from .models import Event, Invite, IndividualProfile, CorporateProfile
+import methods
 
 def index(request):
 	if request.user.is_authenticated():
@@ -19,16 +20,20 @@ def signup(request):
 
 @login_required(redirect_field_name='redirect_path')
 def events(request):
-	return HttpResponse("events")
+	return render(request, 'block_party/events.html', {})
 
 @login_required(redirect_field_name='redirect_path')
 def event_details(request, event_id):
-	new = int(event_id)
-	return render(request, 'block_party/index.html', {'event_id':new})
+	context = {}
+	context['event'] = methods.get_event(event_id)
+	context['confirmed_count'] = methods.get_confirmed_count(event_id)
+	context['invite_count'] = methods.get_invited_count(event_id)
+	context['confirmed_perc'] = (methods.get_confirmed_count(event_id) / methods.get_invited_count(event_id)) * 100
+	return render(request, 'block_party/event_details.html', context)
 
 @login_required(redirect_field_name='redirect_path')
 def create_event(request):
-	return HttpResponse("create_event")
+	return render(request, 'block_party/create_event.html', {})
 
 @login_required(redirect_field_name='redirect_path')
 def profile(request):
@@ -61,3 +66,53 @@ def logout_command(request):
 requiring authentication, redirect_path is added to the POST data that will be submitted with authentication request."""
 def login_page(request):
 	return render(request, 'block_party/login.html', {'redirect_path' : request.GET.get('redirect_path', False)})
+
+def add_individual(request):
+	first_name = request.POST['first_name']
+	last_name = request.POST['last_name']
+	email = request.POST['email']
+	username = email
+	street_address = request.POST['street_address']
+	city_name = request.POST['city_name']
+	state_name = request.POST['state_name']
+	zip_code = request.POST['zip_code']
+	phone_num = request.POST['phone_num']
+	password = request.POST['password']
+
+	u = User.objects.create_user(username, email, password)
+	u.first_name = first_name
+	u.last_name = last_name
+	
+	u.save()
+
+	user_id = u.id
+
+	i = IndividualProfile(email=email,phone_num=phone_num,street_address=street_address,city_name=city_name,state_name=state_name,zip_code=zip_code,first_name=first_name,last_name=last_name,user_id=user_id)
+	i.save()
+
+	return HttpResponseRedirect(reverse('block_party_app:events'))
+
+def add_corporate(request):
+	business_name = request.POST['business_name']
+	email = request.POST['email']
+	username = email
+	phone_num = request.POST['phone_num']
+	contact_first = request.POST['contact_first']
+	contact_last_name = request.POST['contact_last_name']
+	street_address = request.POST['street_address']
+	city_name = request.POST['city_name']
+	state_name = request.POST['state_name']
+	zip_code = request.POST['zip_code']
+	password = request.POST['password']
+
+	u = User.objects.create_user(username, email, password)
+	u.first_name = business_name
+	
+	u.save()
+
+	user_id = u.id
+
+	c = CorporateProfile(email=email,phone_num=phone_num,street_address=street_address,city_name=city_name,state_name=state_name,zip_code=zip_code,business_name=business_name,contact_first=contact_first,contact_last_name=contact_last_name,user_id=user_id)
+	c.save()
+
+	return HttpResponseRedirect(reverse('block_party_app:create_event'))

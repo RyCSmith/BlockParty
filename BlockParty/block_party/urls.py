@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^logout_command/$', views.logout_command, name='logout_command'),
     #login
     url(r'^login_page/.*', views.login_page, name="login_page"),
-    #login_page/?next=/
-    #url(r'^login_page/next=/(?P<next_page>[A-Za-z]*_*[A-Za-z]*)/$', views.login_page, name="login_page")
+    #add new individual
+    url(r'^add_individual/$', views.add_individual, name='add_individual'),
+    #add new corporate sponsor
+    url(r'^add_corporate/$', views.add_corporate, name='add_corporate')
 ]
