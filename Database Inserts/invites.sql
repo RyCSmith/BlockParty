@@ -1,0 +1,10 @@
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("false", 1, 1);
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("true", 2, 1);
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("false", 3, 1);
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("true", 1, 2);
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("true", 3, 2);
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("true", 1, 3);
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("true", 2, 3);
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("false", 3, 3);
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("true", 1, 4);
+insert into block_party_invite (confirmed, event_id, invitee_id) values ("false", 2, 4);
