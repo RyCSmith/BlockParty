@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from .models import Event, Invite, IndividualProfile
+from .models import Event, Invite, IndividualProfile, CorporateProfile
 import methods
 
 def index(request):
@@ -59,7 +59,6 @@ def add_individual(request):
 	u = User.objects.create_user(username, email, password)
 	u.first_name = first_name
 	u.last_name = last_name
-	# u = User(first_name=first_name,last_name=last_name,email=email,username=username,password=password)
 	
 	u.save()
 
@@ -71,5 +70,27 @@ def add_individual(request):
 	return HttpResponseRedirect(reverse('block_party_app:events'))
 
 def add_corporate(request):
-	return HttpResponseRedirect(reverse('block_party_app:events'))
+	business_name = request.POST['business_name']
+	email = request.POST['email']
+	username = email
+	phone_num = request.POST['phone_num']
+	contact_first = request.POST['contact_first']
+	contact_last_name = request.POST['contact_last_name']
+	street_address = request.POST['street_address']
+	city_name = request.POST['city_name']
+	state_name = request.POST['state_name']
+	zip_code = request.POST['zip_code']
+	password = request.POST['password']
+
+	u = User.objects.create_user(username, email, password)
+	u.first_name = business_name
+	
+	u.save()
+
+	user_id = u.id
+
+	c = CorporateProfile(email=email,phone_num=phone_num,street_address=street_address,city_name=city_name,state_name=state_name,zip_code=zip_code,business_name=business_name,contact_first=contact_first,contact_last_name=contact_last_name,user_id=user_id)
+	c.save()
+
+	return HttpResponseRedirect(reverse('block_party_app:create_event'))
 
