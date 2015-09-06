@@ -20,5 +20,9 @@ urlpatterns = [
     # ex: /profile
     url(r'^profile/$', views.profile, name='profile'),
     #authentication
-    url(r'^authenticate/$', views.authentication, name='authentication')
+    url(r'^authenticate/$', views.authentication, name='authentication'),
+    #add new individual
+    url(r'^add_individual/$', views.add_individual, name='add_individual'),
+    #add new corporate sponsor
+    url(r'^add_corporate/$', views.add_corporate, name='add_corporate')
 ]
