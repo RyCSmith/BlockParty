@@ -1,1 +1,0 @@
-insert into block_party_corporateprofile (id, business_name, user_id) values (1, "Penn Apps", 6);
