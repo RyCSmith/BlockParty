@@ -7,8 +7,6 @@ argparse==1.2.1
 bleach==1.4.1
 html5lib==1.0b7
 pyOpenSSL==0.12
-python-apt==0.8.3ubuntu7
-python-debian==0.1.21ubuntu1
 six==1.9.0
 ufw==0.31.1-1
 wsgiref==0.1.2
