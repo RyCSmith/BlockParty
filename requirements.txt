@@ -2,12 +2,10 @@ Django==1.8.4
 Jinja2==2.6
 MarkupSafe==0.15
 MySQL-python==1.2.3
-SQLAlchemy==0.7.4
 Werkzeug==0.8.1
 argparse==1.2.1
 bleach==1.4.1
 html5lib==1.0b7
-language-selector==0.1
 pyOpenSSL==0.12
 python-apt==0.8.3ubuntu7
 python-debian==0.1.21ubuntu1
