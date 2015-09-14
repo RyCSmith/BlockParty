@@ -6,7 +6,6 @@ SQLAlchemy==0.7.4
 Werkzeug==0.8.1
 argparse==1.2.1
 bleach==1.4.1
-command-not-found==0.2.44
 html5lib==1.0b7
 language-selector==0.1
 pyOpenSSL==0.12
